@@ -22,7 +22,7 @@ const getRejectedPromise = delay => {
       backgroundColor: '#ef4040',
       theme: 'dark',
     });
-    console.log(`Rejected promise in ${delay}ms`);
+
   }, delay);
 };
 
