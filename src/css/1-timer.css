@@ -1,8 +1,9 @@
 section {
-  width: 355px;
+  width: 375px;
   display: flex;
   flex-wrap: wrap;
   gap: 32px 8px;
+  padding: 10px;
 }
 
 #datetime-picker {
@@ -44,13 +45,14 @@ button[data-start]:disabled {
 }
 .timer {
   display: flex;
-  gap: 24px;
+  gap: 24px 10px;
 }
 .field {
   display: flex;
   flex-direction: column;
 }
 .value {
+  min-width: 80px;
   font-size: 40px;
   line-height: 1.2;
   letter-spacing: 0.04em;
@@ -59,11 +61,19 @@ button[data-start]:disabled {
 }
 .label {
   text-transform: uppercase;
+  text-align: center;
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #2e2f42;
 }
 
-.iziToast.iziToast-theme-dark .iziToast-icon.ico-error {
-  /* background: url(); */
+.flatpickr-day.today {
+  border-color: #4e75ff;
+}
+.flatpickr-day:hover,
+.flatpickr-day:focus {
+  background-color: #c1c1c1;
+}
+.flatpickr-day.selected {
+  background-color: #4e75ff;
 }
