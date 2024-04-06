@@ -36,7 +36,7 @@ izitoast.settings({
   backgroundColor: '#EF4040',
   iconColor: 'white',
   theme: 'dark',
-  iconUrl: '../src/img/icon.error.svg',
+  icon: '../img/icon.error.svg',
 });
 const checkData = data => {
   if (data.getTime() > Date.now()) {
