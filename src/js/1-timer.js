@@ -8,6 +8,8 @@ const datetimePicker = document.querySelector('#datetime-picker');
 startBtn.setAttribute('disabled', true);
 
 const timer = document.querySelector('.timer');
+const iconError = '../img/icon-error.svg'
+
 
 const timerValues = {
   days: timer.querySelector('[data-days]'),
@@ -36,7 +38,7 @@ izitoast.settings({
   backgroundColor: '#EF4040',
   iconColor: 'white',
   theme: 'dark',
-  iconUrl: './img/icon.error.svg',
+  iconUrl: iconError,
 });
 const checkData = data => {
   if (data.getTime() > Date.now()) {
