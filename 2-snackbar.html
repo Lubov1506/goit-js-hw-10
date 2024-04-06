@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snackbar</title>
     
-    <link rel="stylesheet" href="/goit-js-hw-10/assets/styles-0c1f862e.css">
+    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-9808d4ac.js">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/styles-1e48d198.css">
   </head>
   <body>
     <a href="./index.html">Go to home</a>
@@ -21,7 +24,6 @@
           <legend>State</legend>
           <label>
             <input type="radio" name="state" value="fulfilled" required />
-             <div class="custom-radio"></div>
             Fulfilled
           </label>
           <label>
@@ -33,5 +35,7 @@
         <button type="submit">Create notification</button>
       </form>
     </section>
+
+    
   </body>
 </html>
