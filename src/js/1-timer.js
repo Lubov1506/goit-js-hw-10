@@ -1,14 +1,14 @@
+import 'izitoast/dist/css/izitoast.min.css';
 import flatpickr from 'flatpickr';
 import izitoast from 'izitoast';
 // import 'flatpickr/dist/flatpickr.min.css';
-// import 'izitoast/dist/css/izitoast.min.css';
 const startBtn = document.querySelector('button[data-start]');
 const datetimePicker = document.querySelector('#datetime-picker');
 
 startBtn.setAttribute('disabled', true);
 
 const timer = document.querySelector('.timer');
-const iconError = '../img/icon-error.svg'
+const iconError = './img/icon-error.svg'
 
 
 const timerValues = {
@@ -31,22 +31,21 @@ const options = {
 };
 flatpickr(datetimePicker, options);
 
-izitoast.settings({
+const izitoastOptions = {
   title: 'Error',
   message: 'Illegal operation',
   position: 'topRight',
   backgroundColor: '#EF4040',
-  iconColor: 'white',
   theme: 'dark',
-  icoт: iconError,
-});
+  icoтUrl: iconError,
+};
 const checkData = data => {
   if (data.getTime() > Date.now()) {
     userSelectedDate = data;
     startBtn.removeAttribute('disabled');
   } else {
     startBtn.setAttribute('disabled', true);
-    izitoast.error();
+    izitoast.error(izitoastOptions);
   }
 };
 
