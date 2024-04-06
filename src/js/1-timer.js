@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr';
 import izitoast from 'izitoast';
-import 'flatpickr/dist/flatpickr.min.css';
-import 'izitoast/dist/css/izitoast.min.css';
+// import 'flatpickr/dist/flatpickr.min.css';
+// import 'izitoast/dist/css/izitoast.min.css';
 const startBtn = document.querySelector('button[data-start]');
 const datetimePicker = document.querySelector('#datetime-picker');
 
