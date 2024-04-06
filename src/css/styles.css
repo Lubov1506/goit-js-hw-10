@@ -8,6 +8,7 @@
 @import url('../../node_modules/flatpickr/dist/flatpickr.min.css');
 @import url('../../node_modules/izitoast/dist/css/iziToast.min.css');
 @import url('./1-timer.css');
+@import url('./2-snackbar.css');
 
 * {
   box-sizing: border-box;
