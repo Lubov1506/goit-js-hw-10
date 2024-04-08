@@ -78,6 +78,8 @@ const onFormSubmit = e => {
     });
 
   form.reset();
+  fieldset.classList.remove('focus');
+
 };
 
 form.addEventListener('submit', onFormSubmit);
