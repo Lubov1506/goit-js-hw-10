@@ -16,7 +16,9 @@ const checkDelayInput = delay => {
       theme: 'dark',
       iconUrl: iconWarn,
     });
-    delay.classList.add('autofocus');
+
+    delay.focus();
+
     return false;
   }
   return true;
@@ -33,7 +35,7 @@ const FulfilledPromise = delay => {
 };
 const rejectedPromise = err => {
   iziToast.error({
-    title: 'OK',
+    title: 'Error',
     message: err,
     position: 'topRight',
     backgroundColor: '#ef4040',
@@ -41,18 +43,8 @@ const rejectedPromise = err => {
     iconUrl: iconError,
   });
 };
-const onFormSubmit = e => {
-  e.preventDefault();
-  const delay = document.querySelector('[name="delay"]');
-  const state = document.querySelector('input[name="state"]:checked').value;
-
-  if (!checkDelayInput(delay)) {
-    return;
-  }
-
-  const { value: delayValue } = delay;
-
-  const promise = new Promise((res, rej) => {
+const generatePromise = (state, delayValue) => {
+  return new Promise((res, rej) => {
     setTimeout(() => {
       switch (state) {
         case 'fulfilled':
@@ -64,21 +56,32 @@ const onFormSubmit = e => {
       }
     }, delayValue);
   });
-  
-  promise
+};
+
+const onFormSubmit = e => {
+  e.preventDefault();
+  const delay = document.querySelector('[name="delay"]');
+  const state = document.querySelector('input[name="state"]:checked').value;
+
+  if (!checkDelayInput(delay)) {
+    return;
+  }
+
+  const { value: delayValue } = delay;
+
+  generatePromise(state, delayValue)
     .then(delay => {
       FulfilledPromise(delay);
     })
     .catch(err => {
       rejectedPromise(err);
     });
-  
+
   form.reset();
-  delay.classList.remove('autofocus');
 };
 
 form.addEventListener('submit', onFormSubmit);
 
-fieldset.addEventListener('change', e => {
+fieldset.addEventListener('change', () => {
   fieldset.classList.add('focus');
 });
