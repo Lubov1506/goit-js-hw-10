@@ -6,38 +6,9 @@ import iconError from '../img/icon-error.svg';
 const form = document.querySelector('.form');
 const fieldset = form.querySelector('fieldset');
 
-const getFulfilledPromise = delay => {
-  setTimeout(() => {
-    iziToast.success({
-      title: 'OK',
-      message: `Fulfilled promise in ${delay}ms`,
-      position: 'topRight',
-      backgroundColor: '#59a10d',
-      theme: 'dark',
-      iconUrl: iconSuccess,
-    });
-  }, delay);
-};
-const getRejectedPromise = delay => {
-  setTimeout(() => {
-    iziToast.success({
-      title: 'OK',
-      message: `Rejected promise in ${delay}ms`,
-      position: 'topRight',
-      backgroundColor: '#ef4040',
-      theme: 'dark',
-      iconUrl: iconError,
-    });
-  }, delay);
-};
-
-const onFormSubmit = e => {
-  e.preventDefault();
-  const delay = document.querySelector('[name="delay"]');
-  const state = document.querySelector('input[name="state"]:checked').value;
-
+const checkDelayInput = delay => {
   if (delay.value === '') {
-    iziToast.success({
+    iziToast.warning({
       title: 'Caution',
       message: `You forgot important data`,
       position: 'topRight',
@@ -46,18 +17,62 @@ const onFormSubmit = e => {
       iconUrl: iconWarn,
     });
     delay.classList.add('autofocus');
+    return false;
+  }
+  return true;
+};
+const FulfilledPromise = delay => {
+  iziToast.success({
+    title: 'OK',
+    message: `Fulfilled promise in ${delay}ms`,
+    position: 'topRight',
+    backgroundColor: '#59a10d',
+    theme: 'dark',
+    iconUrl: iconSuccess,
+  });
+};
+const rejectedPromise = err => {
+  iziToast.error({
+    title: 'OK',
+    message: err,
+    position: 'topRight',
+    backgroundColor: '#ef4040',
+    theme: 'dark',
+    iconUrl: iconError,
+  });
+};
+const onFormSubmit = e => {
+  e.preventDefault();
+  const delay = document.querySelector('[name="delay"]');
+  const state = document.querySelector('input[name="state"]:checked').value;
+
+  if (!checkDelayInput(delay)) {
     return;
   }
 
-  switch (state) {
-    case 'fulfilled':
-      getFulfilledPromise(delay.value);
-      break;
-    case 'rejected':
-      getRejectedPromise(delay.value);
-      break;
-  }
+  const { value: delayValue } = delay;
 
+  const promise = new Promise((res, rej) => {
+    setTimeout(() => {
+      switch (state) {
+        case 'fulfilled':
+          res(delayValue);
+          break;
+        case 'rejected':
+          rej(`Rejected promise in ${delayValue}ms`);
+          break;
+      }
+    }, delayValue);
+  });
+  
+  promise
+    .then(delay => {
+      FulfilledPromise(delay);
+    })
+    .catch(err => {
+      rejectedPromise(err);
+    });
+  
   form.reset();
   delay.classList.remove('autofocus');
 };
